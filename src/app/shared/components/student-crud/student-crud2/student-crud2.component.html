@@ -106,57 +106,58 @@
                     <h1 class="m-0 text-center text-white">Student List</h1>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr class="text-center">
-                                <th>Sr. No.</th>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Contact</th>
-                                <th>Age</th>
-                                <th>Gender</th>
-                                <th>Course</th>
-                                <th>Percentage</th>
-                                <th>Is Active</th>
-                                <th>Addmission Date</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center" *ngFor="let stu of studentArr; trackBy : trackById; let i = index">
-                                <td>{{i + 1}}</td>
-                                <td>{{stu.firstName}} {{stu.lastName}}</td>
-                                <td>{{stu.email}}</td>
-                                <td>{{stu.contact}}</td>
-                                <td>{{stu.age}}</td>
-                                <td>{{stu.gender}}</td>
-                                <td>{{stu.course}}</td>
-                                <td>{{stu.percentage}}</td>
-                                <td>
-                                    <input
-                                    [checked]="stu.isActive"
-                                    (click)="onStateChange(stu.id, $event)"
-                                     type="checkbox">
-                                    <span class="badge p-2 ml-1" [ngClass]="({
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Sr. No.</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Contact</th>
+                                    <th>Age</th>
+                                    <th>Gender</th>
+                                    <th>Course</th>
+                                    <th>Percentage</th>
+                                    <th>Is Active</th>
+                                    <th>Addmission Date</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center"
+                                    *ngFor="let stu of studentArr; trackBy : trackById; let i = index">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{stu.firstName}} {{stu.lastName}}</td>
+                                    <td>{{stu.email}}</td>
+                                    <td>{{stu.contact}}</td>
+                                    <td>{{stu.age}}</td>
+                                    <td>{{stu.gender}}</td>
+                                    <td>{{stu.course}}</td>
+                                    <td>{{stu.percentage}}</td>
+                                    <td>
+                                        <input [checked]="stu.isActive" (click)="onStateChange(stu.id, $event)"
+                                            type="checkbox">
+                                        <span class="badge p-2 ml-1" [ngClass]="({
                                         'badge-success' : stu.isActive,
                                         'badge-danger' : !stu.isActive
                                     })">
-                                        {{stu.isActive ? 'Active' : 'InActive'}}
-                                    </span>
-                                </td>
-                                <td>{{stu.admissionDate}}</td>
-                                <td>
-                                    <button (click)="onStudentEdit(stu)" mat-mini-fab color="primary">
-                                        <mat-icon>edit</mat-icon>
-                                    </button>
-                                    <button [disabled]="isInEditMode &&  stu.id === editId"
-                                        (click)="onStudentDelete(stu.id)" mat-mini-fab color="warn" class="ml-2">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                            {{stu.isActive ? 'Active' : 'InActive'}}
+                                        </span>
+                                    </td>
+                                    <td>{{stu.admissionDate}}</td>
+                                    <td>
+                                        <button (click)="onStudentEdit(stu)" mat-mini-fab color="primary">
+                                            <mat-icon>edit</mat-icon>
+                                        </button>
+                                        <button [disabled]="isInEditMode &&  stu.id === editId"
+                                            (click)="onStudentDelete(stu.id)" mat-mini-fab color="warn" class="ml-2">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

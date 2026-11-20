@@ -48,52 +48,54 @@
 
     <div class="row">
         <div class="col-md-10 mt-4 mb-2 offset-md-1">
-            <div
-            *ngIf="studentArr.length > 0; else noStudent"
-             class="card">
+            <div *ngIf="studentArr.length > 0; else noStudent" class="card">
                 <div class="card-header bg-info">
                     <h2 class="text-center text-white">Student List</h2>
                 </div>
                 <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr class="text-center">
-                                <th>Sr. No.</th>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>Contact</th>
-                                <th>Is Active</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="text-center" *ngFor="let stu of studentArr; trackBy : trackById; let i = index">
-                                <td>{{i + 1}}</td>
-                                <td>{{stu.firstName}} {{stu.lastName}}</td>
-                                <td>{{stu.email}}</td>
-                                <td>{{stu.contact}}</td>
-                                <td>
-                                    <input [checked]="stu.isActive" type="checkbox"
-                                        (change)="onStateChange(stu.id, $event)" class="mr-1">
-                                    <span class="badge p-2" [ngClass]="({
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr class="text-center">
+                                    <th>Sr. No.</th>
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Contact</th>
+                                    <th>Is Active</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="text-center"
+                                    *ngFor="let stu of studentArr; trackBy : trackById; let i = index">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{stu.firstName}} {{stu.lastName}}</td>
+                                    <td>{{stu.email}}</td>
+                                    <td>{{stu.contact}}</td>
+                                    <td>
+                                        <input [checked]="stu.isActive" type="checkbox"
+                                            (change)="onStateChange(stu.id, $event)" class="mr-1">
+                                        <span class="badge p-2" [ngClass]="({
                                         'badge-success' : stu.isActive, 'badge-danger' : !stu.isActive 
                                         })">
-                                        {{stu.isActive ? 'Active' : 'Inactive'}}
-                                    </span>
-                                </td>
-                                <td><button (click)="onStduentEdit(stu)" mat-mini-fab color="primary">
-                                        <mat-icon>edit</mat-icon>
-                                    </button></td>
-                                <td>
-                                    <button [disabled]="isInEditMode && editId===stu.id"
-                                        (click)="onStudentDelete(stu.id)" mat-mini-fab color="warn">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                            {{stu.isActive ? 'Active' : 'Inactive'}}
+                                        </span>
+                                    </td>
+                                    <td><button (click)="onStduentEdit(stu)" mat-mini-fab color="primary">
+                                            <mat-icon>edit</mat-icon>
+                                        </button></td>
+                                    <td>
+                                        <button [disabled]="isInEditMode && editId===stu.id"
+                                            (click)="onStudentDelete(stu.id)" mat-mini-fab color="warn">
+                                            <mat-icon>delete</mat-icon>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
             <ng-template #noStudent>
