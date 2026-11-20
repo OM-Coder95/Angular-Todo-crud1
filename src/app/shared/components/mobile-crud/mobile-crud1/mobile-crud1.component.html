@@ -1,0 +1,68 @@
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h1 class="alert alert-warning text-center text-danger">Mobile CRUD</h1>
+    </div>
+    <div class="col-md-6 offset-md-3" *ngIf="mobileArr.length > 0; else noMobileData">
+        <div class="card mt-2" *ngFor="let m of mobileArr; trackBy : trackById">
+            <div class="card-body" [ngClass]="({
+                'bluring' : m.availableStock === 0
+            })">
+                <div class="row">
+                    <div class="col-md-3">
+                        <figure class="fig m-0">
+                            <img class="image" *ngIf="m.productImg; else noProductImg" [src]="m.productImg"
+                                [alt]="m.productName" [title]="m.productName">
+                            <ng-template #noProductImg>
+                                <div class="noImage">
+                                    <img [src]="defaultImg" alt="">
+                                    <p class="para">No Image Found</p>
+                                </div>
+                            </ng-template>
+                        </figure>
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="m-0">
+                            {{m.productName}}
+
+                            <small class="badge" [ngClass]="({
+                                'badge-success' : m.rating >= 7,
+                                'badge-warning' : m.rating >= 5 && m.rating < 7,
+                                'badge-danger' : m.rating < 5
+                            })">{{m.rating}}</small>
+
+                        </h1>
+                        <h2>Features</h2>
+                        <ul class="list-group list-group-flush border">
+                            <li class="list-group-item" *ngFor="let f of m.features">
+                                {{f}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="price-section">
+                            <del>
+                                {{ m.price + (m.price * 10 / 100) | currency : 'INR' }}
+                            </del>
+                            <span>10% OFF</span>
+                            <h4>
+                                {{ m.price | currency : 'INR' }}
+                            </h4>
+                        </div>
+                        <p *ngIf="m.availableStock > 0; else noProductStock" class="text-danger">Only
+                            {{m.availableStock}} Left !!!</p>
+                        <ng-template #noProductStock>
+                            <p class="text-danger">
+                                Product Not Available!!!
+                            </p>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-10 offset-md-1">
+        <ng-template #noMobileData>
+            <p class="alert alert-info text-center text-danger w-100">No Mobile Data Added Yet!!!</p>
+        </ng-template>
+    </div>
+</div>

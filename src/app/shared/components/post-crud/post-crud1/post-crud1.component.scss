@@ -1,0 +1,18 @@
+.cardHeader {
+  background-color: #f8f9fa;
+
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #343a40;
+    margin: 0;
+    line-height: 1.5;
+    text-transform: capitalize;
+  }
+}
+
+.img {
+  width: 100px;
+  height: 230px;
+  object-fit: cover;
+}

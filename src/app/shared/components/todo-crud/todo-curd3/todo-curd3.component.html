@@ -1,0 +1,62 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="p-2 bg-info text-center text-white">Todo CURD 3</h2>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="from-group">
+                        <label for="todoName">Enter your Todo</label>
+                        <input type="text" class="form-control" #nameRef>
+                    </div>
+                    <div class="from-group">
+                        <label for="isCompleted">Is Completed</label>
+                        <select class="form-control" #isCompletedRef>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group mt-2">
+                        <button (click)="onTodoAdd()" *ngIf="!isInEditMode" mat-raised-button color="primary"
+                            class="w-100">Add Todo</button>
+                        <button (click)="onTodoUpdate()" *ngIf="isInEditMode" mat-raised-button color="accent"
+                            class="w-100">Update Todo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card" *ngIf="todoArr.length > 0; else noTodoData">
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center"
+                            *ngFor="let todo of todoArr; trackBy : trackById">
+                            <div>
+                                <input type="checkbox">
+                                <strong class="ml-1">{{todo.todoItem}}</strong>
+                                <span class="badge ml-1" [ngClass]="({
+                                    'badge-success' : todo.isCompleted,
+                                    'badge-danger' : !todo.isCompleted
+                                })">{{todo.isCompleted ? 'Completed' : 'Incompleted'}}</span>
+                            </div>
+                            <div>
+                                <button (click)="onTodoEdit(todo)" mat-mini-fab color="primary">
+                                    <mat-icon>edit</mat-icon>
+                                </button>
+                                <button [disabled]="isInEditMode && todo.todoId === editId"
+                                    (click)="onTodoDelete(todo.todoId)" class="ml-2" mat-mini-fab color="warn">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <ng-template #noTodoData>
+                <p class="alert alert-info p-2 text-center text-danger">No Todo Added Yet!!!</p>
+            </ng-template>
+        </div>
+    </div>
+</div>

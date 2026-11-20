@@ -45,7 +45,11 @@ export class TodoCRUD1Component implements OnInit {
   @ViewChild("isCompletedRef") isCompletedRef !: ElementRef<HTMLSelectElement>;
 
   isInEditMode: boolean = false;
-  private editId !: string;
+  editId !: string;
+
+  trackById(index : number, todo : Itodo) {
+    return todo.todoId;
+  }
 
   onAddTodo() {
     let todoObj = {

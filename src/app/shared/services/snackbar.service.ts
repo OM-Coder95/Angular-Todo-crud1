@@ -11,16 +11,17 @@ export class SnackbarService {
   showSuccess(message: string) {
     this._snackBar.open(message, 'Close', {
       duration: 2000,
-      horizontalPosition: "right",
-      verticalPosition: "top",
+      horizontalPosition: 'left',
+      verticalPosition: 'top'
     })
   }
 
   showError(message: string) {
     this._snackBar.open(message, 'Close', {
       duration: 2000,
-      horizontalPosition: "center",
-      verticalPosition: 'top',
+      horizontalPosition: 'left',
+      verticalPosition: 'top'
     })
   }
+
 }

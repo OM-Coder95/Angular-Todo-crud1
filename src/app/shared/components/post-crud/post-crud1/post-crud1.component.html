@@ -1,0 +1,65 @@
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h3 class="m-0 text-center text-white p-2 bg-warning">Post CRUD</h3>
+        </div>
+        <div class="col-md-6 offset-md-3 mt-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="title">Post Title</label>
+                        <input type="text" class="form-control" #titleRef>
+                    </div>
+                    <div class="form-group">
+                        <label for="img">Post Image</label>
+                        <input type="text" class="form-control" #imgRef>
+                    </div>
+                    <div class="form-group">
+                        <label for="postContent">Post Content</label>
+                        <textarea class="form-control" rows="3" #contentRef></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button (click)="onPostAdd()" *ngIf="!isInEditMode" mat-raised-button color="primary"
+                            class="w-100">
+                            Add Post
+                        </button>
+                        <button (click)="onPostUpdate()" *ngIf="isInEditMode" mat-raised-button color="primary"
+                            class="w-100">
+                            Update Post
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="postArr.length > 0; else noPostData">
+        <div class="col-md-3 mt-4" *ngFor="let post of postArr; trackBy : trackById">
+            <div class="card h-100">
+                <div class="card-header" clasa="cardHeader">
+                    <h3>{{post.title}}</h3>
+                </div>
+                <div class="card-body">
+                    <img [src]="post.img" [alt]="post.title" class="img w-100">
+                    <p>
+                        {{post.body}}
+                    </p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <button (click)="onPostEdit(post)" mat-mini-fab color="primary">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button [disabled]="isInEditMode && post.id === editId" (click)="onPostDelete(post.id)" mat-mini-fab
+                        color="warn">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #noPostData>
+        <p class="alert alert-danger text-center text-danger">No Post Data added yet!!!</p>
+    </ng-template>
+</div>
